@@ -4,46 +4,46 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 @RunWith(JUnit4.class)
-public class BSTTest
+public class DAGTest
 {
     @Test
     public void testAddEdge(){
-        dag dag1 = new dag(5);
+        DAG DAG1 = new DAG(5);
 
-        assertEquals("Testing adding a self-loop. Should return false.", false, dag1.addEdge(0, 0));
+        assertEquals("Testing adding a self-loop. Should return false.", false, DAG1.addEdge(0, 0));
 
-        assertEquals("Testing adding a valid edge. Should return true.", true, dag1.addEdge(0, 1));
-        assertEquals("Testing adding a valid edge. Should return true.", true, dag1.addEdge(1, 2));
+        assertEquals("Testing adding a valid edge. Should return true.", true, DAG1.addEdge(0, 1));
+        assertEquals("Testing adding a valid edge. Should return true.", true, DAG1.addEdge(1, 2));
 
-        assertEquals("Testing adding an edge that would result in a cylce. Should return false.", false, dag1.addEdge(2, 0));
+        assertEquals("Testing adding an edge that would result in a cylce. Should return false.", false, DAG1.addEdge(2, 0));
 
-        assertEquals("Testing adding an edge from non-existing vertices. Should return false.", false, dag1.addEdge(5, 4));
-        assertEquals("Testing adding an edge from non-existing vertices. Should return false.", false, dag1.addEdge(89, 53));
-        assertEquals("Testing adding an edge from negative vertices. Should return false.", false, dag1.addEdge(-2, -4));
+        assertEquals("Testing adding an edge from non-existing vertices. Should return false.", false, DAG1.addEdge(5, 4));
+        assertEquals("Testing adding an edge from non-existing vertices. Should return false.", false, DAG1.addEdge(89, 53));
+        assertEquals("Testing adding an edge from negative vertices. Should return false.", false, DAG1.addEdge(-2, -4));
 
     }
 
     @Test
     public void testV(){
-        dag dag1 = new dag(5);
-        assertEquals("Testing V()", 5, dag1.V());
+        DAG DAG1 = new DAG(5);
+        assertEquals("Testing V()", 5, DAG1.V());
     }
 
     @Test
     public void testAdj(){
-        dag dag1 = new dag(5);
+        DAG DAG1 = new DAG(5);
 
-        assertTrue("Testing empty adj list", dag1.adj(0).isEmpty());
+        assertTrue("Testing empty adj list", DAG1.adj(0).isEmpty());
 
         ArrayList<Integer> expectedResult = new ArrayList<Integer>();
 
         //Testing single edge adj list
         expectedResult.add(2);
-        dag1.addEdge(1, 2);
+        DAG1.addEdge(1, 2);
 
-        assertTrue("Testing single edge adj list", dag1.adj(1).size() == expectedResult.size());
+        assertTrue("Testing single edge adj list", DAG1.adj(1).size() == expectedResult.size());
         for(int i : expectedResult){
-            assertTrue("Testing single edge adj list", dag1.adj(1).contains(i));
+            assertTrue("Testing single edge adj list", DAG1.adj(1).contains(i));
         }
 
         expectedResult.clear();
@@ -51,18 +51,18 @@ public class BSTTest
         expectedResult.add(3);
         expectedResult.add(4);
 
-        dag1.addEdge(2, 3);
-        dag1.addEdge(2, 4);
+        DAG1.addEdge(2, 3);
+        DAG1.addEdge(2, 4);
 
-        assertTrue("Testing multi-edge adj list", dag1.adj(2).size() == expectedResult.size());
+        assertTrue("Testing multi-edge adj list", DAG1.adj(2).size() == expectedResult.size());
         for(int i : expectedResult){
-            assertTrue("Testing multi-edge adj list", dag1.adj(2).contains(i));
+            assertTrue("Testing multi-edge adj list", DAG1.adj(2).contains(i));
         }
     }
 
     @Test
     public void testDagLowestCommonAncestor(){
-        dag testDag1 = new dag(5);
+        DAG testDag1 = new DAG(5);
 
         testDag1.addEdge(0, 1);
         testDag1.addEdge(0, 2);
@@ -81,7 +81,7 @@ public class BSTTest
 
 
 
-        dag testDag2 = new dag(7);
+        DAG testDag2 = new DAG(7);
 
         testDag2.addEdge(0, 3);
         testDag2.addEdge(1, 3);
