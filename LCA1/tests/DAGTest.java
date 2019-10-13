@@ -3,6 +3,9 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+
+import java.util.ArrayList;
+
 @RunWith(JUnit4.class)
 public class DAGTest
 {
@@ -33,7 +36,7 @@ public class DAGTest
     public void testAdj(){
         DAG DAG1 = new DAG(5);
 
-        assertTrue("Testing empty adj list", DAG1.adj(0).isEmpty());
+        assertTrue("Testing empty adj list", DAG1.adjacent(0).isEmpty());
 
         ArrayList<Integer> expectedResult = new ArrayList<Integer>();
 
@@ -41,9 +44,9 @@ public class DAGTest
         expectedResult.add(2);
         DAG1.addEdge(1, 2);
 
-        assertTrue("Testing single edge adj list", DAG1.adj(1).size() == expectedResult.size());
+        assertTrue("Testing single edge adj list", DAG1.adjacent(1).size() == expectedResult.size());
         for(int i : expectedResult){
-            assertTrue("Testing single edge adj list", DAG1.adj(1).contains(i));
+            assertTrue("Testing single edge adj list", DAG1.adjacent(1).contains(i));
         }
 
         expectedResult.clear();
@@ -54,9 +57,9 @@ public class DAGTest
         DAG1.addEdge(2, 3);
         DAG1.addEdge(2, 4);
 
-        assertTrue("Testing multi-edge adj list", DAG1.adj(2).size() == expectedResult.size());
+        assertTrue("Testing multi-edge adj list", DAG1.adjacent(2).size() == expectedResult.size());
         for(int i : expectedResult){
-            assertTrue("Testing multi-edge adj list", DAG1.adj(2).contains(i));
+            assertTrue("Testing multi-edge adj list", DAG1.adjacent(2).contains(i));
         }
     }
 

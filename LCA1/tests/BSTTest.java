@@ -8,19 +8,19 @@ public class BSTTest
 {
 
     @Test
-    public void testInsert() {
+    public void testPut() {
         BST<Character, Character> bst = new BST<Character, Character>();
 
 
         //Testing node creation.
-        bst.insert('B', 'B');
-        assertEquals("Testing insert on empty tree",
-                "(()B())", bst.printTree());
+        bst.put('B', 'B');
+        assertEquals("Testing put on empty tree",
+                "(()B())", bst.printKeysInOrder());
 
         //Testing nodes get sorted correctly when added.
-        bst.insert('A', 'A');
-        bst.insert('C', 'C');
-        bst.insert('D', 'D');
+        bst.put('A', 'A');
+        bst.put('C', 'C');
+        bst.put('D', 'D');
 
 
         /*
@@ -31,23 +31,23 @@ public class BSTTest
          * 				D
          */
 
-        assertEquals("Testing insert of multiple nodes into tree",
-                "((()A())B(()C(()D())))", bst.printTree());
+        assertEquals("Testing put of multiple nodes into tree",
+                "((()A())B(()C(()D())))", bst.printKeysInOrder());
 
         //Testing update of value in tree.
-        bst.insert('C', 'X');
-        assertEquals("Testing insert of multiple nodes into tree",
+        bst.put('C', 'X');
+        assertEquals("Testing put of multiple nodes into tree",
                 'X', (char)bst.get('C'));
 
-        //Testing insert of null value. (Should delete node)
-        bst.insert('C', null);
-        assertEquals("Testing insert of null value into tree",
-                "((()A())B(()D()))", bst.printTree());
+        //Testing put of null value. (Should delete node)
+        bst.put('C', null);
+        assertEquals("Testing put of null value into tree",
+                "((()A())B(()D()))", bst.printKeysInOrder());
 
-        //Testing insert of null key. (Should have no effect)
-        bst.insert(null, 'Q');
-        assertEquals("Testing insert of null key into tree",
-                "((()A())B(()D()))", bst.printTree());
+        //Testing put of null key. (Should have no effect)
+        bst.put(null, 'Q');
+        assertEquals("Testing put of null key into tree",
+                "((()A())B(()D()))", bst.printKeysInOrder());
 
     }
 
@@ -58,10 +58,10 @@ public class BSTTest
         assertNull("Testing get on empty tree",
                 bst.get('A'));
 
-        bst.insert('B', 'B');
-        bst.insert('C', 'C');
-        bst.insert('D', 'D');
-        bst.insert('E', 'E');
+        bst.put('B', 'B');
+        bst.put('C', 'C');
+        bst.put('D', 'D');
+        bst.put('E', 'E');
 
         assertNull("Testing get on multiple node tree that doesn't contain key",
                 bst.get('A'));
@@ -86,7 +86,7 @@ public class BSTTest
         assertNull("Testing LCA on empty tree", bst.lowestCommonAncestor(1, 2));
 
         //Testing one-node tree.
-        bst.insert(1,1);
+        bst.put(1,1);
 
         //If given non-present keys - should return null.
 
@@ -99,14 +99,14 @@ public class BSTTest
         //Testing multi-node tree
         BST<Integer, Integer> bst2 = new BST<Integer, Integer>();
 
-        bst2.insert(7, 7);   //        _7_
-        bst2.insert(8, 8);   //      /     \
-        bst2.insert(3, 3);   //    _3_      8
-        bst2.insert(1, 1);   //  /     \
-        bst2.insert(2, 2);   // 1       6
-        bst2.insert(6, 6);   //  \     /
-        bst2.insert(4, 4);   //   2   4
-        bst2.insert(5, 5);   //        \
+        bst2.put(7, 7);   //        _7_
+        bst2.put(8, 8);   //      /     \
+        bst2.put(3, 3);   //    _3_      8
+        bst2.put(1, 1);   //  /     \
+        bst2.put(2, 2);   // 1       6
+        bst2.put(6, 6);   //  \     /
+        bst2.put(4, 4);   //   2   4
+        bst2.put(5, 5);   //        \
         //         5
 
         //If either given key is the root, should return the root
@@ -123,7 +123,7 @@ public class BSTTest
         BST<Integer, Integer> bst = new BST<Integer, Integer>();
         assertEquals("Testing empty tree", true, bst.isEmpty());
 
-        bst.insert(1, 1);
+        bst.put(1, 1);
         assertEquals("Testing non-empty tree", false, bst.isEmpty());
     }
 
@@ -132,13 +132,13 @@ public class BSTTest
         BST<Integer, Integer> bst = new BST<Integer, Integer>();
         assertEquals("Testing empty tree", 0, bst.size());
 
-        bst.insert(1, 1);
+        bst.put(1, 1);
         assertEquals("Testing single node tree", 1, bst.size());
 
-        bst.insert(2, 2);
-        bst.insert(7, 7);
-        bst.insert(3, 3);
-        bst.insert(99, 99);
+        bst.put(2, 2);
+        bst.put(7, 7);
+        bst.put(3, 3);
+        bst.put(99, 99);
 
         assertEquals("Testing multi node tree", 5, bst.size());
     }
@@ -148,14 +148,14 @@ public class BSTTest
         BST<Integer, Integer> bst = new BST<Integer, Integer>();
         assertEquals("Testing empty tree", false, bst.contains(4));
 
-        bst.insert(1, 1);
+        bst.put(1, 1);
         assertEquals("Testing single node tree containing key", true, bst.contains(1));
         assertEquals("Testing single node tree not containing key", false, bst.contains(5));
 
-        bst.insert(2, 2);
-        bst.insert(7, 7);
-        bst.insert(3, 3);
-        bst.insert(99, 99);
+        bst.put(2, 2);
+        bst.put(7, 7);
+        bst.put(3, 3);
+        bst.put(99, 99);
 
         assertEquals("Testing multi node tree containing key", true, bst.contains(99));
         assertEquals("Testing multi node tree containing key", false, bst.contains(4));
@@ -219,6 +219,7 @@ public void testMedian() {
 
     assertEquals("Checking median of non-empty tree", bst.get(5), bst.median());
 
+}
 
 @Test
 public void testPrintKeysInOrder() {
